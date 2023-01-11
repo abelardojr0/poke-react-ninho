@@ -1,14 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login/Login";
 import "./App.css";
+import Jogo from "./Jogo/Jogo";
+import { GlobalStorage } from "./GlobalStorage";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+      <GlobalStorage>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/jogo" element={<Jogo />} />
+          </Routes>
+        </BrowserRouter>
+      </GlobalStorage>
     </>
   );
 }
