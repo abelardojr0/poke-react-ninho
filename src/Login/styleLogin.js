@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Titulo = styled.h1`
   font-size: 4rem;
   font-weight: bold;
-  color: white;
+  color: black;
 `;
 export const Subtitulo = styled.h2`
   font-size: 2rem;
-  color: white;
+  color: black;
 `;
 
 export const FormularioLogin = styled.form`
@@ -17,13 +17,13 @@ export const FormularioLogin = styled.form`
 `;
 export const Nome = styled.label`
   font-size: 2rem;
-  color: white;
+  color: black;
 `;
 
 export const NomeInput = styled.input`
   outline: none;
   background-color: transparent;
-  border: 2px solid white;
+  border: 2px solid black;
   padding: 1rem;
   font-size: 1rem;
 `;

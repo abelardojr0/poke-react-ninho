@@ -13,9 +13,11 @@ const CardPokemon = ({
   setDesabilitado,
 }) => {
   const global = React.useContext(GlobalContext);
+
   if (listaConferencia.length === 3) {
     setDesabilitado(false);
   }
+
   function pokemonSelecionado({ target }) {
     const alt = target.alt;
 
@@ -28,7 +30,9 @@ const CardPokemon = ({
       target.classList.add("ativo");
       pokemonsEscolhidos.push(pokemon);
       global.setPokemonsJogador(pokemonsEscolhidos);
+      localStorage.setItem("pokemons", JSON.stringify(pokemonsEscolhidos));
       setListaConferencia([...listaConferencia, imagemFilha.alt]);
+
       cont++;
     } else if (
       alt !== undefined &&
@@ -40,6 +44,7 @@ const CardPokemon = ({
 
       pokemonsEscolhidos.push(pokemon);
       global.setPokemonsJogador(pokemonsEscolhidos);
+      localStorage.setItem("pokemons", JSON.stringify(pokemonsEscolhidos));
       setListaConferencia([...listaConferencia, alt]);
       cont++;
     } else if (

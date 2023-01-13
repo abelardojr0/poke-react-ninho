@@ -1,7 +1,8 @@
 import React from "react";
 import { GlobalStorage } from "../GlobalStorage";
 import { Container, GlobalStyles } from "../styles";
-import { TituloJogo } from "./styleJogo";
+import { Links, TituloJogo } from "./styleJogo";
+// const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
 
 const Jogo = () => {
   return (
@@ -9,7 +10,13 @@ const Jogo = () => {
       <GlobalStorage>
         <GlobalStyles />
         <Container>
-          <TituloJogo>Jogo</TituloJogo>;
+          <TituloJogo>Jogo</TituloJogo>
+          {/* {LSPokemons.map((pokemon) => (
+            <img src={pokemon.foto} alt={pokemon.nome} />
+          ))} */}
+          <Links to="/batalha">Batalha</Links>
+          <Links to="/duelo">Duelo</Links>
+          <Links to="/lista">Lista</Links>
         </Container>
       </GlobalStorage>
     </>
