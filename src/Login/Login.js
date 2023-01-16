@@ -4,57 +4,82 @@ import CardPokemon from "./CardPokemon";
 import Pokemons from "../Pokemons";
 import {
   BotaoCadastrar,
+  BotaoEntrar,
+  Formulario,
   ListaDePokemons,
-  Nome,
+  NomeInput,
   Subtitulo,
   Titulo,
 } from "./styleLogin";
 import { Container, GlobalStyles } from "../styles";
 import { Link } from "react-router-dom";
-import InputNome from "./InputNome";
 
 const Login = () => {
-  const listaDePokemons = Pokemons(2);
+  const listaDePokemons = Pokemons(1);
   const [listaConferencia, setListaConferencia] = React.useState([]);
+  const [logado, setLogado] = React.useState(false);
   const [desabilitado, setDesabilitado] = React.useState(true);
-  const [valorInput, setValorInput] = React.useState("");
-
-  function logando() {
-    const valor = document.querySelector("#nome");
-    setValorInput(valor);
-    console.log(valorInput);
-  }
   if (listaDePokemons === []) return null;
+
+  function validarInput({ target }) {
+    if (target.value.length >= 3) {
+      setDesabilitado(false);
+    } else {
+      setDesabilitado(true);
+    }
+  }
+
+  function logarNoJogo() {
+    setLogado(true);
+    setDesabilitado(true);
+  }
 
   return (
     <>
       <GlobalStorage>
         <GlobalStyles />
         <Container>
-          <Titulo>Bem vindo a Kanto</Titulo>
-          <Nome htmlFor="nome">Escolha o seu nome: </Nome>
-          <InputNome type="text" name="nome" id="nome" />
-          <Link to="/jogo">
-            <BotaoCadastrar disabled={desabilitado} onClick={logando}>
-              Entrar
-            </BotaoCadastrar>
-          </Link>
+          {!logado && (
+            <>
+              <Titulo>Bem vindo a Kanto</Titulo>
+              <Formulario>
+                <NomeInput
+                  onChange={validarInput}
+                  type="text"
+                  name="nome"
+                  id="nome"
+                  placeholder="Nickname"
+                />
+                <BotaoCadastrar onClick={logarNoJogo} disabled={desabilitado}>
+                  Entrar
+                </BotaoCadastrar>
+              </Formulario>
+            </>
+          )}
 
-          <Subtitulo>Escolha 3 pokemons</Subtitulo>
-          <ListaDePokemons>
-            {listaDePokemons &&
-              listaDePokemons.map((pokemon) => (
-                <CardPokemon
-                  key={pokemon.nome}
-                  nome={pokemon.nome}
-                  imagem={pokemon.foto}
-                  pokemon={pokemon}
-                  listaConferencia={listaConferencia}
-                  setListaConferencia={setListaConferencia}
-                  setDesabilitado={setDesabilitado}
-                ></CardPokemon>
-              ))}
-          </ListaDePokemons>
+          {logado && (
+            <>
+              <Subtitulo>Escolha 3 pokemons</Subtitulo>
+              <ListaDePokemons>
+                {listaDePokemons &&
+                  listaDePokemons.map((pokemon) => (
+                    <CardPokemon
+                      key={pokemon.nome}
+                      nome={pokemon.nome}
+                      imagem={pokemon.foto}
+                      pokemon={pokemon}
+                      tipo={pokemon.type}
+                      listaConferencia={listaConferencia}
+                      setListaConferencia={setListaConferencia}
+                      setDesabilitado={setDesabilitado}
+                    ></CardPokemon>
+                  ))}
+              </ListaDePokemons>
+              <Link to="/jogo">
+                <BotaoEntrar disabled={desabilitado}>Entrar</BotaoEntrar>
+              </Link>
+            </>
+          )}
         </Container>
       </GlobalStorage>
     </>

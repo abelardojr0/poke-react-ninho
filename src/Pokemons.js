@@ -10,6 +10,10 @@ const Pokemons = (nivel) => {
       this.nome = pokemon.name;
       this.foto = pokemon.sprites.other.dream_world.front_default;
       this.id = pokemon.id;
+      const types = pokemon.types.map((typeSlot) => typeSlot.type.name);
+      const [type] = types;
+      this.types = types;
+      this.type = type;
     }
   }
 

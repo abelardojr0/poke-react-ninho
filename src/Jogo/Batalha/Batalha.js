@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GlobalStorage } from "../../GlobalStorage";
 import Pokemons from "../../Pokemons";
-import { Container, GlobalStyles } from "../../styles";
+import { Container, ContainerLista, GlobalStyles } from "../../styles";
 import Conflito from "../Conflito/Conflito";
 // import Conflito from "../Conflito/Conflito";
 import {
@@ -37,6 +37,7 @@ const Batalha = () => {
   // function fecharModal() {
   //   setSelecionado(false);
   // }
+
   if (pokemonDoInimigo && pokemonDoJogador) {
     console.log("Pokemon do jogador " + pokemonDoJogador.nome);
     console.log("Pokemon do Inimigo " + pokemonDoInimigo.nome);
@@ -47,8 +48,7 @@ const Batalha = () => {
     <>
       <GlobalStorage>
         <GlobalStyles />
-        <Container>
-          <h1>Lista dos pokemons do jogador: </h1>
+        <ContainerLista>
           <p>Escolha o pokemons que você vai usar na batalha: </p>
           <ListaPokemonsJogador>
             {LSPokemons.map((pokemon) => (
@@ -56,6 +56,7 @@ const Batalha = () => {
                 key={pokemon.nome}
                 nome={pokemon.nome}
                 imagem={pokemon.foto}
+                tipo={pokemon.type}
                 pokemon={pokemon}
                 ListaDePokemonsInimigo={ListaDePokemonsInimigo}
                 setPokemonDoInimigo={setPokemonDoInimigo}
@@ -71,6 +72,7 @@ const Batalha = () => {
                 key={pokemon.nome}
                 nome={pokemon.nome}
                 imagem={pokemon.foto}
+                tipo={pokemon.type}
                 id={pokemon.id}
               />
             ))}
@@ -86,7 +88,7 @@ const Batalha = () => {
           <Link to="/jogo">
             <BotaoVoltar>Voltar</BotaoVoltar>
           </Link>
-        </Container>
+        </ContainerLista>
       </GlobalStorage>
     </>
   );

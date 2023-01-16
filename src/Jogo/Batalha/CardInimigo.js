@@ -1,10 +1,10 @@
 import React from "react";
 import { LiListaInimigo } from "../Lista/styleLista";
 
-const CardInimigo = ({ nome, imagem, id }) => {
+const CardInimigo = ({ nome, imagem, id, tipo }) => {
   return (
     <>
-      <LiListaInimigo id={id}>
+      <LiListaInimigo className={tipo} id={id}>
         <img src={imagem} alt={nome} />
         <p>{nome}</p>
       </LiListaInimigo>

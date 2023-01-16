@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
+export const TituloLista = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 60px;
+`;
 export const ListaPokemonsJogador = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding: 1rem;
   gap: 10px;
 `;
@@ -34,20 +40,23 @@ export const ListaPokemonsInimigo = styled.ul`
   }
 `;
 export const LiLista = styled.li`
-  border: 2px solid black;
+  position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  padding: 5px 10px;
   font-size: 2rem;
+  width: 300px;
+  color: white;
+  border-radius: 15px;
   cursor: pointer;
   img {
     width: 100px;
     height: 100px;
   }
   &:hover {
-    border: 2px solid white;
     color: white;
+    filter: brightness(1.1);
   }
   &.ativo {
     border: 2px solid #da70d6;

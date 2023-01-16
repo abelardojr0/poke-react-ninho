@@ -5,6 +5,7 @@ const CardBatalha = ({
   nome,
   imagem,
   pokemon,
+  tipo,
   setSelecionado,
   ListaDePokemonsInimigo,
   setPokemonDoInimigo,
@@ -42,7 +43,7 @@ const CardBatalha = ({
   }
   return (
     <>
-      <LiLista onClick={pokemonSelecionado}>
+      <LiLista className={tipo} onClick={pokemonSelecionado}>
         <img src={imagem} alt={nome} />
         <p>{nome}</p>
       </LiLista>
