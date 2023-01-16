@@ -63,6 +63,10 @@ export const LiPokemon = styled.li`
     max-width: 80px;
     max-height: 80px;
   }
+  &:hover {
+    border: 2px solid white;
+    color: white;
+  }
   &.ativo {
     border: 2px solid white;
     color: white;

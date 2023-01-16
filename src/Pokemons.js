@@ -7,8 +7,9 @@ const Pokemons = (nivel) => {
 
   class Pokemon {
     constructor(pokemon) {
-      this.nome = pokemon["name"];
+      this.nome = pokemon.name;
       this.foto = pokemon.sprites.other.dream_world.front_default;
+      this.id = pokemon.id;
     }
   }
 

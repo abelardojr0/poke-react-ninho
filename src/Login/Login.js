@@ -6,18 +6,24 @@ import {
   BotaoCadastrar,
   ListaDePokemons,
   Nome,
-  NomeInput,
   Subtitulo,
   Titulo,
 } from "./styleLogin";
 import { Container, GlobalStyles } from "../styles";
 import { Link } from "react-router-dom";
+import InputNome from "./InputNome";
 
 const Login = () => {
   const listaDePokemons = Pokemons(2);
   const [listaConferencia, setListaConferencia] = React.useState([]);
   const [desabilitado, setDesabilitado] = React.useState(true);
+  const [valorInput, setValorInput] = React.useState("");
 
+  function logando() {
+    const valor = document.querySelector("#nome");
+    setValorInput(valor);
+    console.log(valorInput);
+  }
   if (listaDePokemons === []) return null;
 
   return (
@@ -27,9 +33,11 @@ const Login = () => {
         <Container>
           <Titulo>Bem vindo a Kanto</Titulo>
           <Nome htmlFor="nome">Escolha o seu nome: </Nome>
-          <NomeInput type="text" name="nome" id="nome" />
+          <InputNome type="text" name="nome" id="nome" />
           <Link to="/jogo">
-            <BotaoCadastrar disabled={desabilitado}>Entrar</BotaoCadastrar>
+            <BotaoCadastrar disabled={desabilitado} onClick={logando}>
+              Entrar
+            </BotaoCadastrar>
           </Link>
 
           <Subtitulo>Escolha 3 pokemons</Subtitulo>

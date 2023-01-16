@@ -3,23 +3,46 @@ import { Link } from "react-router-dom";
 import { GlobalStorage } from "../../GlobalStorage";
 import Pokemons from "../../Pokemons";
 import { Container, GlobalStyles } from "../../styles";
-import CardLista from "../Lista/CardLista";
-import { BotaoVoltar, ListaPokemonsJogador } from "../Lista/styleLista";
+import Conflito from "../Conflito/Conflito";
+// import Conflito from "../Conflito/Conflito";
+import {
+  BotaoVoltar,
+  ListaPokemonsInimigo,
+  ListaPokemonsJogador,
+} from "../Lista/styleLista";
+import CardBatalha from "./CardBatalha";
+import CardInimigo from "./CardInimigo";
 
 const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
 
 const Batalha = () => {
+  const [selecionado, setSelecionado] = React.useState(false);
+  const [pokemonDoInimigo, setPokemonDoInimigo] = React.useState(null);
+  const [pokemonDoJogador, setPokemonDoJogador] = React.useState(null);
+
   const listaDePokemons = Pokemons(1);
-  let pokemonsInimigo = [];
-  if (listaDePokemons !== undefined) {
-    pokemonsInimigo = [
-      listaDePokemons[Math.floor(Math.random() * listaDePokemons.length)],
-      listaDePokemons[Math.floor(Math.random() * listaDePokemons.length)],
-      listaDePokemons[Math.floor(Math.random() * listaDePokemons.length)],
-    ];
+
+  const ListaDePokemonsInimigo = React.useMemo(() => {
+    let pokemonsInimigo = [];
+    if (listaDePokemons !== undefined) {
+      pokemonsInimigo = [
+        listaDePokemons[Math.floor(Math.random() * listaDePokemons.length)],
+        listaDePokemons[Math.floor(Math.random() * listaDePokemons.length)],
+        listaDePokemons[Math.floor(Math.random() * listaDePokemons.length)],
+      ];
+    }
+    return pokemonsInimigo;
+  }, [listaDePokemons]);
+
+  // function fecharModal() {
+  //   setSelecionado(false);
+  // }
+  if (pokemonDoInimigo && pokemonDoJogador) {
+    console.log("Pokemon do jogador " + pokemonDoJogador.nome);
+    console.log("Pokemon do Inimigo " + pokemonDoInimigo.nome);
   }
 
-  if (pokemonsInimigo === []) return null;
+  if (ListaDePokemonsInimigo === undefined) return null;
   return (
     <>
       <GlobalStorage>
@@ -29,23 +52,37 @@ const Batalha = () => {
           <p>Escolha o pokemons que você vai usar na batalha: </p>
           <ListaPokemonsJogador>
             {LSPokemons.map((pokemon) => (
-              <CardLista
+              <CardBatalha
                 key={pokemon.nome}
                 nome={pokemon.nome}
                 imagem={pokemon.foto}
+                pokemon={pokemon}
+                ListaDePokemonsInimigo={ListaDePokemonsInimigo}
+                setPokemonDoInimigo={setPokemonDoInimigo}
+                setPokemonDoJogador={setPokemonDoJogador}
+                setSelecionado={setSelecionado}
               />
             ))}
           </ListaPokemonsJogador>
           <h1>Lista dos pokemons do Inimigo: </h1>
-          <ListaPokemonsJogador>
-            {pokemonsInimigo.map((pokemon) => (
-              <CardLista
+          <ListaPokemonsInimigo data-inimigo>
+            {ListaDePokemonsInimigo.map((pokemon) => (
+              <CardInimigo
                 key={pokemon.nome}
                 nome={pokemon.nome}
                 imagem={pokemon.foto}
+                id={pokemon.id}
               />
             ))}
-          </ListaPokemonsJogador>
+          </ListaPokemonsInimigo>
+          {selecionado && (
+            <>
+              <Conflito
+                pokemonDoJogador={pokemonDoJogador}
+                pokemonDoInimigo={pokemonDoInimigo}
+              />
+            </>
+          )}
           <Link to="/jogo">
             <BotaoVoltar>Voltar</BotaoVoltar>
           </Link>

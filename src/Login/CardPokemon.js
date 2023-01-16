@@ -3,7 +3,6 @@ import { GlobalContext } from "../GlobalStorage";
 import { LiPokemon } from "./styleLogin";
 const pokemonsEscolhidos = [];
 let cont = 0;
-
 const CardPokemon = ({
   nome,
   imagem,

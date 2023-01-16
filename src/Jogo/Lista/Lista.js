@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { GlobalStorage } from "../../GlobalStorage";
-import { ListaDePokemons } from "../../Login/styleLogin";
 import { Container, GlobalStyles } from "../../styles";
 import CardLista from "./CardLista";
 import { BotaoVoltar, ListaPokemonsJogador } from "./styleLista";
