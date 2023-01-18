@@ -14,6 +14,14 @@ const Pokemons = (nivel) => {
       const [type] = types;
       this.types = types;
       this.type = type;
+      this.hp = pokemon.stats[0].base_stat;
+      this.ataque = pokemon.stats[1].base_stat;
+      this.defesa = pokemon.stats[2].base_stat;
+      this.specialAttack = pokemon.stats[3].base_stat;
+      this.specialDefense = pokemon.stats[4].base_stat;
+      this.speed = pokemon.stats[5].base_stat;
+      this.height = pokemon.height;
+      this.weight = pokemon.weight;
     }
   }
 
@@ -27,7 +35,7 @@ const Pokemons = (nivel) => {
   React.useEffect(() => {
     async function fetchDados() {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?offset=0&limit=55"
+        "https://pokeapi.co/api/v2/pokemon?offset=0&limit=70"
       );
       const jsonResponse = await response.json();
       const pokemons = jsonResponse.results;
@@ -66,6 +74,8 @@ const Pokemons = (nivel) => {
         listaPokemon[49],
         listaPokemon[51],
         listaPokemon[53],
+        listaPokemon[55],
+        listaPokemon[57],
       ];
     } else if (nivel === 2) {
       listaPokemonsPorNivel = [
@@ -92,6 +102,8 @@ const Pokemons = (nivel) => {
         listaPokemon[50],
         listaPokemon[52],
         listaPokemon[54],
+        listaPokemon[56],
+        listaPokemon[58],
       ];
     } else if (nivel === 3) {
       listaPokemonsPorNivel = [

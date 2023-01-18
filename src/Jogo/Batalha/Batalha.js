@@ -1,25 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { GlobalStorage } from "../../GlobalStorage";
 import Pokemons from "../../Pokemons";
-import { Container, ContainerLista, GlobalStyles } from "../../styles";
+import { BotaoSair, ContainerLista, GlobalStyles } from "../../styles";
 import Conflito from "../Conflito/Conflito";
 // import Conflito from "../Conflito/Conflito";
 import {
-  BotaoVoltar,
   ListaPokemonsInimigo,
   ListaPokemonsJogador,
-} from "../Lista/styleLista";
+  TextoEscolha,
+} from "./styleBatalha";
 import CardBatalha from "./CardBatalha";
 import CardInimigo from "./CardInimigo";
-
-const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
+import { Link } from "react-router-dom";
 
 const Batalha = () => {
+  const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
   const [selecionado, setSelecionado] = React.useState(false);
   const [pokemonDoInimigo, setPokemonDoInimigo] = React.useState(null);
   const [pokemonDoJogador, setPokemonDoJogador] = React.useState(null);
-
+  const [contSelecao, setContSelecao] = React.useState(0);
   const listaDePokemons = Pokemons(1);
 
   const ListaDePokemonsInimigo = React.useMemo(() => {
@@ -34,22 +33,15 @@ const Batalha = () => {
     return pokemonsInimigo;
   }, [listaDePokemons]);
 
-  // function fecharModal() {
-  //   setSelecionado(false);
-  // }
-
-  if (pokemonDoInimigo && pokemonDoJogador) {
-    console.log("Pokemon do jogador " + pokemonDoJogador.nome);
-    console.log("Pokemon do Inimigo " + pokemonDoInimigo.nome);
-  }
-
   if (ListaDePokemonsInimigo === undefined) return null;
   return (
     <>
       <GlobalStorage>
         <GlobalStyles />
         <ContainerLista>
-          <p>Escolha o pokemons que você vai usar na batalha: </p>
+          <TextoEscolha>
+            Escolha o pokemons que você vai usar na batalha:{" "}
+          </TextoEscolha>
           <ListaPokemonsJogador>
             {LSPokemons.map((pokemon) => (
               <CardBatalha
@@ -62,10 +54,12 @@ const Batalha = () => {
                 setPokemonDoInimigo={setPokemonDoInimigo}
                 setPokemonDoJogador={setPokemonDoJogador}
                 setSelecionado={setSelecionado}
+                contSelecao={contSelecao}
+                setContSelecao={setContSelecao}
               />
             ))}
           </ListaPokemonsJogador>
-          <h1>Lista dos pokemons do Inimigo: </h1>
+          <TextoEscolha>Lista dos pokemons do Inimigo: </TextoEscolha>
           <ListaPokemonsInimigo data-inimigo>
             {ListaDePokemonsInimigo.map((pokemon) => (
               <CardInimigo
@@ -82,11 +76,12 @@ const Batalha = () => {
               <Conflito
                 pokemonDoJogador={pokemonDoJogador}
                 pokemonDoInimigo={pokemonDoInimigo}
+                setContSelecao={setContSelecao}
               />
             </>
           )}
           <Link to="/jogo">
-            <BotaoVoltar>Voltar</BotaoVoltar>
+            <BotaoSair />
           </Link>
         </ContainerLista>
       </GlobalStorage>

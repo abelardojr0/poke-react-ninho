@@ -1,13 +1,13 @@
 import React from "react";
-import { LiListaInimigo } from "../Lista/styleLista";
+import { LiLista } from "../../styles";
 
 const CardInimigo = ({ nome, imagem, id, tipo }) => {
   return (
     <>
-      <LiListaInimigo className={tipo} id={id}>
+      <LiLista className={tipo} id={id}>
         <img src={imagem} alt={nome} />
         <p>{nome}</p>
-      </LiListaInimigo>
+      </LiLista>
     </>
   );
 };

@@ -1,8 +1,9 @@
 import React from "react";
 import { NomePokemon, TipoPokemon } from "../../Login/styleLogin";
-import { LiLista } from "./styleLista";
+import { LiLista } from "../../styles";
 
 const CardLista = ({ imagem, nome, tipo }) => {
+  console.log(tipo);
   return (
     <>
       <LiLista className={tipo}>

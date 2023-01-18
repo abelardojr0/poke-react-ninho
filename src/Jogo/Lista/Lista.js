@@ -2,19 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GlobalStorage } from "../../GlobalStorage";
 import { ContainerLista, GlobalStyles } from "../../styles";
-import { BotaoSair } from "../styleJogo";
+import { BotaoSair } from "../../styles";
 import CardLista from "./CardLista";
-import { BotaoVoltar, ListaPokemonsJogador, TituloLista } from "./styleLista";
-const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
+import { ListaPokemons, TituloLista } from "./styleLista";
 
 const Lista = () => {
+  const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
   return (
     <>
       <GlobalStorage>
         <GlobalStyles />
         <ContainerLista>
           <TituloLista>Pokemons: </TituloLista>
-          <ListaPokemonsJogador>
+          <ListaPokemons>
             {LSPokemons.map((pokemon) => (
               <CardLista
                 key={pokemon.nome}
@@ -23,7 +23,7 @@ const Lista = () => {
                 imagem={pokemon.foto}
               />
             ))}
-          </ListaPokemonsJogador>
+          </ListaPokemons>
           <Link to="/jogo">
             <BotaoSair />
           </Link>

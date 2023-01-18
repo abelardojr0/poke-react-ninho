@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const Titulo = styled.h1`
+  font-family: "Pokemon Solid", sans-serif;
   font-size: 4rem;
-  font-weight: bold;
-  color: white;
+  color: #000c1e;
   margin-bottom: 20px;
+  text-shadow: -1px -1px 0px #fff, -1px 1px 0px #fff, 1px -1px 0px #fff,
+    1px 0px 0px #fff;
 `;
 export const Subtitulo = styled.h2`
   font-size: 3.5rem;
@@ -33,13 +35,21 @@ export const NomeInput = styled.input`
   border: 2px solid white;
   padding: 1rem;
   font-size: 1rem;
+  border-radius: 15px;
   font-weight: bold;
+  &::placeholder {
+    color: white;
+  }
 `;
 
 export const BotaoCadastrar = styled.button`
   margin-top: 20px;
   width: 100%;
-  background-color: #008cba;
+  background: linear-gradient(
+    90deg,
+    rgba(29, 128, 211, 1) 0%,
+    rgba(32, 232, 221, 1) 100%
+  );
   padding: 0.5rem 1rem;
   color: black;
   cursor: pointer;
@@ -47,8 +57,15 @@ export const BotaoCadastrar = styled.button`
   font-weight: bold;
   border-radius: 15px;
   animation: pulsando 1500ms infinite ease-in-out;
+  border: 2px solid white;
   &:disabled {
-    background-color: gray;
+    background: linear-gradient(
+      90deg,
+      rgba(27, 62, 74, 1) 0%,
+      rgba(85, 141, 158, 1) 100%
+    );
+    border: 2px solid black;
+    color: #f3f3f3;
     animation: none;
   }
 
@@ -66,19 +83,29 @@ export const BotaoCadastrar = styled.button`
 `;
 
 export const BotaoEntrar = styled.button`
-  background-color: #008cba;
+  background: linear-gradient(
+    90deg,
+    rgba(29, 128, 211, 1) 0%,
+    rgba(32, 232, 221, 1) 100%
+  );
+  border: 2px solid white;
   padding: 0.5rem 1rem;
   color: black;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   border-radius: 15px;
   animation: pulsando 1500ms infinite ease-in-out;
-  position: absolute;
-  top: 0;
-  right: 0;
+  margin-top: 20px;
+  width: 300px;
   &:disabled {
-    background-color: gray;
+    background: linear-gradient(
+      90deg,
+      rgba(27, 62, 74, 1) 0%,
+      rgba(85, 141, 158, 1) 100%
+    );
+    border: 2px solid black;
+    color: #f3f3f3;
     animation: none;
   }
 `;
@@ -102,17 +129,17 @@ export const LiPokemon = styled.li`
   width: 70%;
   color: white;
   border: 2px solid transparent;
+  filter: grayscale(80%);
   img {
     max-width: 80px;
     max-height: 80px;
   }
   &:hover {
-    color: black;
     filter: contrast(200%);
   }
   &.ativo {
-    color: black;
     border: 2px solid white;
+    filter: contrast(200%);
   }
 `;
 

@@ -11,7 +11,7 @@ import {
   Subtitulo,
   Titulo,
 } from "./styleLogin";
-import { Container, GlobalStyles } from "../styles";
+import { Container, GlobalStyles, NickName } from "../styles";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -32,6 +32,8 @@ const Login = () => {
   function logarNoJogo() {
     setLogado(true);
     setDesabilitado(true);
+    localStorage.setItem("nickname", document.querySelector("#nome").value);
+    localStorage.setItem("nivel", 1);
   }
 
   return (
@@ -41,7 +43,7 @@ const Login = () => {
         <Container>
           {!logado && (
             <>
-              <Titulo>Bem vindo a Kanto</Titulo>
+              <Titulo>Bem vindo</Titulo>
               <Formulario>
                 <NomeInput
                   onChange={validarInput}
@@ -59,6 +61,7 @@ const Login = () => {
 
           {logado && (
             <>
+              <NickName>{localStorage.getItem("nickname")}</NickName>
               <Subtitulo>Escolha 3 pokemons</Subtitulo>
               <ListaDePokemons>
                 {listaDePokemons &&

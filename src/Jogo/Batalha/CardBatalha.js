@@ -1,6 +1,6 @@
 import React from "react";
-import { LiLista } from "../Lista/styleLista";
-let contSelecao = 0;
+import { LiLista } from "../../styles";
+
 const CardBatalha = ({
   nome,
   imagem,
@@ -10,33 +10,34 @@ const CardBatalha = ({
   ListaDePokemonsInimigo,
   setPokemonDoInimigo,
   setPokemonDoJogador,
+  contSelecao,
+  setContSelecao,
 }) => {
-  const listaInimigo = document.querySelector("[data-inimigo]");
   function escolhaDoInimigo() {
-    const escolhaAleatoria = Math.floor(Math.random() * 3);
-    if (escolhaAleatoria === 0) {
-      listaInimigo.classList.add("primeiro");
-      setPokemonDoInimigo(ListaDePokemonsInimigo[0]);
-    } else if (escolhaAleatoria === 1) {
-      listaInimigo.classList.add("segundo");
-      setPokemonDoInimigo(ListaDePokemonsInimigo[1]);
-    } else if (escolhaAleatoria === 2) {
-      listaInimigo.classList.add("terceiro");
-      setPokemonDoInimigo(ListaDePokemonsInimigo[2]);
+    if (ListaDePokemonsInimigo) {
+      const escolhaAleatoria = Math.floor(Math.random() * 3);
+      if (escolhaAleatoria === 0) {
+        setPokemonDoInimigo(ListaDePokemonsInimigo[0]);
+      } else if (escolhaAleatoria === 1) {
+        setPokemonDoInimigo(ListaDePokemonsInimigo[1]);
+      } else if (escolhaAleatoria === 2) {
+        setPokemonDoInimigo(ListaDePokemonsInimigo[2]);
+      }
     }
   }
+
   function pokemonSelecionado({ target }) {
     const alt = target.alt;
     setPokemonDoJogador(pokemon);
     if (alt === undefined && contSelecao === 0) {
       target.classList.add("ativo");
-      contSelecao++;
+      setContSelecao(1);
       escolhaDoInimigo();
       setSelecionado(true);
     } else if (alt !== undefined && contSelecao === 0) {
       const li = target.parentElement;
       li.classList.add("ativo");
-      contSelecao++;
+      setContSelecao(1);
       escolhaDoInimigo();
       setSelecionado(true);
     }
