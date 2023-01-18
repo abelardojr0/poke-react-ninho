@@ -117,6 +117,16 @@ export const BotaoSair = styled.button`
 export const NickName = styled.p`
   position: absolute;
   top: 10px;
+  right: 35px;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 15px;
+`;
+export const Experiencia = styled.p`
+  position: absolute;
+  top: 50px;
   right: 10px;
   font-size: 1rem;
   background-color: black;

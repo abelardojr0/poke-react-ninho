@@ -8,9 +8,9 @@ export const TituloLista = styled.h1`
 
 export const ListaPokemons = styled.ul`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem;
   width: 100%;
   min-height: 50vh;

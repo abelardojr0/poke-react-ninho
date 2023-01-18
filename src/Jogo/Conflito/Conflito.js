@@ -1,10 +1,17 @@
 import React from "react";
 import {
+  BotaoBatalhar,
   BotaoFechar,
+  BotaoRelatorio,
   CardConflito,
+  DetalhesRelatorio,
+  DivisoriaRelatorio,
   ImagemVersos,
+  MensagemCarregando,
   Modal,
   ModalContainer,
+  ModalRelatorio,
+  NomeRelatorio,
 } from "./styleConflito";
 import ImagemVS from "../../Img/vs.png";
 import { Link } from "react-router-dom";
@@ -16,9 +23,13 @@ const Conflito = ({
 }) => {
   const LSPokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
   const novaListaPokemons = LSPokemons;
-  const nivel = localStorage.getItem("nivel");
-  let condicaoJogador = "";
-  let condicaoInimigo = "";
+  const experiencia = localStorage.getItem("experiencia");
+  const [condicaoJogador, setCondicaoJogador] = React.useState(null);
+  const [condicaoInimigo, setCondicaoInimigo] = React.useState(null);
+  const [carregando, setCarregando] = React.useState(null);
+  const [relatorio, setRelatorio] = React.useState(false);
+  let vitorioso = "";
+
   // function checarVantagens(vantagens, inimigo) {
   //   let vantagem = false; // A VARIAVEL COMEÇA EM FALSE
 
@@ -66,11 +77,13 @@ const Conflito = ({
     if (tentativaPokemonJogador > 0 && hpPokemonJogador > 0) {
       // SE A TENTATIVA FOI BEM SUCEDIDA E O POKEMON ESTÁ VIVO ENTÃO...
 
-      hpPokemonInimigo -= pokemonDoJogador.ataque - pokemonDoInimigo.defesa;
+      hpPokemonInimigo -=
+        pokemonDoJogador.ataque - pokemonDoInimigo.defesa * 0.65;
       acertosPokemonJogador += 1;
     }
     if (tentativaPokemonInimigo > 0 && hpPokemonInimigo > 0) {
-      hpPokemonJogador -= pokemonDoInimigo.ataque - pokemonDoJogador.defesa;
+      hpPokemonJogador -=
+        pokemonDoInimigo.ataque - pokemonDoJogador.defesa * 0.65;
       acertosPokemonInimigo += 1;
     }
     contRound += 1;
@@ -95,8 +108,7 @@ const Conflito = ({
       } e sobrou ${hpPokemonInimigo.toFixed(2)} pontos de vida`
     );
     // vencedor = pokemonDoInimigo.nome;
-    condicaoInimigo = "vencedor";
-    condicaoJogador = "perdedor";
+    vitorioso = "inimigo";
   } else if (hpPokemonInimigo <= 0 && hpPokemonJogador > hpPokemonInimigo) {
     //CHECA SE O POKEMON DO JOGADOR GANHOU
     console.log(
@@ -105,14 +117,14 @@ const Conflito = ({
       }  e sobrou ${hpPokemonJogador.toFixed(2)} pontos de vida`
     );
     // vencedor = pokemonDoJogador.nome;
-    condicaoJogador = "vencedor";
-    condicaoInimigo = "perdedor";
+    vitorioso = "jogador";
+
     if (modo === "Captura") {
       novaListaPokemons.push(pokemonDoInimigo);
       localStorage.setItem("pokemons", JSON.stringify(novaListaPokemons));
     } else if (modo === "Batalha") {
-      let novoNivel = +nivel + 1;
-      localStorage.setItem("nivel", novoNivel);
+      let novaExperiencia = +experiencia + 1;
+      localStorage.setItem("experiencia", novaExperiencia);
     }
   } else {
     //SE NÃO EM CASOS RAROS, ELES EMPATAM
@@ -121,10 +133,89 @@ const Conflito = ({
   function resetarPokemons() {
     setContSelecao(0);
   }
+  function iniciarBatalha() {
+    setCarregando(true);
+    setTimeout(() => {
+      setCarregando(false);
+      if (vitorioso === "inimigo") {
+        setCondicaoInimigo("vencedor");
+        setCondicaoJogador("perdedor");
+      } else if (vitorioso === "jogador") {
+        setCondicaoJogador("vencedor");
+        setCondicaoInimigo("perdedor");
+      }
+    }, 2000);
+  }
+
+  function abrirRelatorio() {
+    setRelatorio(true);
+  }
+  function fecharRelatorio() {
+    setRelatorio(false);
+  }
   return (
     <>
       <ModalContainer>
         <Modal>
+          <BotaoRelatorio onClick={abrirRelatorio}>Relatório</BotaoRelatorio>
+          {relatorio && (
+            <>
+              <ModalContainer>
+                <ModalRelatorio>
+                  <DivisoriaRelatorio>
+                    <img
+                      src={pokemonDoJogador.foto}
+                      alt={pokemonDoJogador.nome}
+                    />
+                    <NomeRelatorio>{pokemonDoJogador.nome}</NomeRelatorio>
+                    <DetalhesRelatorio>
+                      <p>
+                        Acertos: <span>{acertosPokemonJogador}</span>
+                      </p>
+                      <p>
+                        Vida Inicial: <span>{pokemonDoJogador.hp}</span>
+                      </p>
+                      <p>
+                        Vida Restante: <span>{hpPokemonJogador}</span>
+                      </p>
+                      <p>
+                        Ataque: <span>{pokemonDoJogador.ataque}</span>
+                      </p>
+                      <p>
+                        Defesa: <span>{pokemonDoJogador.defesa}</span>
+                      </p>
+                    </DetalhesRelatorio>
+                  </DivisoriaRelatorio>
+                  <DivisoriaRelatorio>
+                    <img
+                      src={pokemonDoInimigo.foto}
+                      alt={pokemonDoInimigo.nome}
+                    />
+
+                    <NomeRelatorio>{pokemonDoInimigo.nome}</NomeRelatorio>
+                    <DetalhesRelatorio>
+                      <p>
+                        Acertos: <span>{acertosPokemonInimigo}</span>
+                      </p>
+                      <p>
+                        Vida Inicial: <span>{pokemonDoInimigo.hp}</span>
+                      </p>
+                      <p>
+                        Vida Restante: <span>{hpPokemonInimigo}</span>
+                      </p>
+                      <p>
+                        Ataque: <span>{pokemonDoInimigo.ataque}</span>
+                      </p>
+                      <p>
+                        Defesa: <span>{pokemonDoInimigo.defesa}</span>
+                      </p>
+                    </DetalhesRelatorio>
+                    <BotaoFechar onClick={fecharRelatorio}>X</BotaoFechar>
+                  </DivisoriaRelatorio>
+                </ModalRelatorio>
+              </ModalContainer>
+            </>
+          )}
           <CardConflito className={condicaoJogador}>
             <h1>JOGADOR:</h1>
             <img src={pokemonDoJogador.foto} alt={pokemonDoJogador.nome} />
@@ -132,6 +223,14 @@ const Conflito = ({
           </CardConflito>
 
           <ImagemVersos src={ImagemVS} alt={"Imagem VS"} />
+
+          {carregando && (
+            <>
+              <MensagemCarregando>
+                Aguarde a batalha terminar...
+              </MensagemCarregando>
+            </>
+          )}
 
           <CardConflito className={condicaoInimigo}>
             <h1>INIMIGO:</h1>
@@ -142,6 +241,7 @@ const Conflito = ({
             <BotaoFechar onClick={resetarPokemons}>X</BotaoFechar>
           </Link>
         </Modal>
+        <BotaoBatalhar onClick={iniciarBatalha}>Batalhar</BotaoBatalhar>
       </ModalContainer>
     </>
   );

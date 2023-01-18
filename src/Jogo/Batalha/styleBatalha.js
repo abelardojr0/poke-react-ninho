@@ -7,7 +7,7 @@ export const TextoEscolha = styled.p`
 `;
 export const ListaPokemonsJogador = styled.ul`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: flex-start;
   padding: 1rem;
@@ -17,7 +17,7 @@ export const ListaPokemonsJogador = styled.ul`
 
 export const ListaPokemonsInimigo = styled.ul`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
   padding: 1rem;

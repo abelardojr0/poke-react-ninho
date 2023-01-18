@@ -52,12 +52,17 @@ export const CardConflito = styled.div`
   }
   &.vencedor {
     border: 4px solid green;
+    filter: contrast(200%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+
     &::after {
       content: "vencedor";
     }
   }
   &.perdedor {
     border: 4px solid red;
+    filter: grayscale(100%);
   }
 `;
 
@@ -76,52 +81,94 @@ export const BotaoFechar = styled.button`
   cursor: pointer;
 `;
 
-// export const Spinner = styled.span`
-//   width: 48px;
-//   height: 48px;
-//   border-radius: 50%;
-//   position: relative;
-//   animation: rotate 1s linear infinite;
-//   &::after,
-//   &::before {
-//     content: "";
-//     box-sizing: border-box;
-//     position: absolute;
-//     inset: 0px;
-//     border-radius: 50%;
-//     border: 5px solid #fff;
-//     animation: prixClipFix 2s linear infinite;
-//   }
-//   &::after {
-//     border-color: #ff3d00;
-//     animation: prixClipFix 2s linear infinite,
-//       rotate 0.5s linear infinite reverse;
-//     inset: 6px;
-//   }
-//   @keyframes rotate {
-//     0% {
-//       transform: rotate(0deg);
-//     }
-//     100% {
-//       transform: rotate(360deg);
-//     }
-//   }
+export const BotaoBatalhar = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    rgba(29, 128, 211, 1) 0%,
+    rgba(32, 232, 221, 1) 100%
+  );
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  color: black;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 15px;
+`;
 
-//   @keyframes prixClipFix {
-//     0% {
-//       clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
-//     }
-//     25% {
-//       clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
-//     }
-//     50% {
-//       clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
-//     }
-//     75% {
-//       clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
-//     }
-//     100% {
-//       clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
-//     }
-//   }
-// `;
+export const MensagemCarregando = styled.p`
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  left: 35%;
+`;
+export const BotaoRelatorio = styled.button`
+  position: absolute;
+  top: 50px;
+  left: 43%;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    rgba(29, 128, 211, 1) 0%,
+    rgba(32, 232, 221, 1) 100%
+  );
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  color: black;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 15px;
+`;
+export const ModalRelatorio = styled.div`
+  min-width: 100px;
+  padding: 40px;
+  position: relative;
+  height: 60vh;
+  margin: 20px;
+  background-color: #7c8bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  gap: 300px;
+`;
+
+export const DivisoriaRelatorio = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  border: 2px solid white;
+  padding: 1rem;
+  border-radius: 15px;
+  width: 100%;
+  min-height: 400px;
+`;
+export const NomeRelatorio = styled.p`
+  font-size: 2rem;
+  color: #000014;
+  text-transform: capitalize;
+`;
+export const DetalhesRelatorio = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  p {
+    font-size: 1.2rem;
+    color: #003256;
+  }
+  span {
+    font-size: 1rem;
+    color: #20597c;
+  }
+`;

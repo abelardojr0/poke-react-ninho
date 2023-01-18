@@ -77,6 +77,7 @@ const Batalha = () => {
                 pokemonDoJogador={pokemonDoJogador}
                 pokemonDoInimigo={pokemonDoInimigo}
                 setContSelecao={setContSelecao}
+                modo="Batalha"
               />
             </>
           )}

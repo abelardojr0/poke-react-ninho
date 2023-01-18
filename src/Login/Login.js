@@ -11,7 +11,7 @@ import {
   Subtitulo,
   Titulo,
 } from "./styleLogin";
-import { Container, GlobalStyles, NickName } from "../styles";
+import { Container, Experiencia, GlobalStyles, NickName } from "../styles";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -33,7 +33,7 @@ const Login = () => {
     setLogado(true);
     setDesabilitado(true);
     localStorage.setItem("nickname", document.querySelector("#nome").value);
-    localStorage.setItem("nivel", 1);
+    localStorage.setItem("experiencia", 1);
   }
 
   return (
@@ -61,7 +61,10 @@ const Login = () => {
 
           {logado && (
             <>
-              <NickName>{localStorage.getItem("nickname")}</NickName>
+              <NickName>Nick: {localStorage.getItem("nickname")}</NickName>
+              <Experiencia>
+                Experiencia: {localStorage.getItem("experiencia")}
+              </Experiencia>
               <Subtitulo>Escolha 3 pokemons</Subtitulo>
               <ListaDePokemons>
                 {listaDePokemons &&
