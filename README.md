@@ -12,7 +12,6 @@ Projeto desenvolvido em React com o objetivo de praticar apreendizado, se trata 
 Projeto 100% responsivo!
 
 ##  :computer:  Versão Desktop:
-![desktop](https://user-images.githubusercontent.com/106066785/229648854-17687200-97f1-424e-9b26-a039753902bc.png)
 ![desktop](https://user-images.githubusercontent.com/106066785/229649845-4db22cc4-f91b-4c0f-9a36-f4607a77b1a2.png)
 
 
