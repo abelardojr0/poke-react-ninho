@@ -9,12 +9,8 @@
 Projeto desenvolvido em React com o objetivo de praticar apreendizado, se trata de um jogo de batalha de pokemons.
 
 
-Projeto 100% responsivo!
-
 ##  :computer:  Versão Desktop:
 ![desktop](https://user-images.githubusercontent.com/106066785/229649845-4db22cc4-f91b-4c0f-9a36-f4607a77b1a2.png)
-
-
 
 
 # 📁 Acesso ao projeto
