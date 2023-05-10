@@ -51,6 +51,7 @@ const Login = () => {
                   name="nome"
                   id="nome"
                   placeholder="Nickname"
+                  autoComplete="off"
                 />
                 <BotaoCadastrar onClick={logarNoJogo} disabled={desabilitado}>
                   Entrar

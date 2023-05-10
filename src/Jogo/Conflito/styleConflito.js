@@ -109,7 +109,7 @@ export const MensagemCarregando = styled.p`
 export const BotaoRelatorio = styled.button`
   position: absolute;
   top: 50px;
-  left: 43%;
+  left: 45%;
   margin: 0 auto;
   background: linear-gradient(
     90deg,

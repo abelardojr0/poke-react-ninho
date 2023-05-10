@@ -38,7 +38,7 @@ export const NomeInput = styled.input`
   border-radius: 15px;
   font-weight: bold;
   &::placeholder {
-    color: white;
+    color: #f3f3f3;
   }
 `;
 

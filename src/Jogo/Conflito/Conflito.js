@@ -39,7 +39,6 @@ const Conflito = ({
   //     return vantagem;
   //   }
   // }
-
   let [hpPokemonJogador, hpPokemonInimigo] = [
     pokemonDoJogador.hp,
     pokemonDoInimigo.hp,
@@ -66,76 +65,81 @@ const Conflito = ({
   // if (vantagemPokemonInimigo) {
   //   modificadorVantagemPokemonInimigo = 10;
   // }
+  function lutar() {
+    while (hpPokemonJogador > 0 && hpPokemonInimigo > 0) {
+      //LOOP QUE VAI FAZER A BATALHA ACONTECER ENQUANTO TIVER UM POKEMON VIVO.
+      let [tentativaPokemonJogador, tentativaPokemonInimigo] = [
+        Math.random() - 0.5,
+        Math.random() - 0.5,
+      ]; //VARIÁVEIS QUE VÃO ARMAZENAR UM NÚMERO ALETÓRIO ENTRE 0 E 1 E DIMINUIR 0.5, GERANDO 50% DE CHANCE DE ACERTO PARA CADA TENTATIVA DE ATAQUE DE CADA POKEMON
 
-  while (hpPokemonJogador > 0 && hpPokemonInimigo > 0) {
-    //LOOP QUE VAI FAZER A BATALHA ACONTECER ENQUANTO TIVER UM POKEMON VIVO.
-    let [tentativaPokemonJogador, tentativaPokemonInimigo] = [
-      Math.random() - 0.5,
-      Math.random() - 0.5,
-    ]; //VARIÁVEIS QUE VÃO ARMAZENAR UM NÚMERO ALETÓRIO ENTRE 0 E 1 E DIMINUIR 0.5, GERANDO 50% DE CHANCE DE ACERTO PARA CADA TENTATIVA DE ATAQUE DE CADA POKEMON
+      if (tentativaPokemonJogador > 0 && hpPokemonJogador > 0) {
+        // SE A TENTATIVA FOI BEM SUCEDIDA E O POKEMON ESTÁ VIVO ENTÃO...
 
-    if (tentativaPokemonJogador > 0 && hpPokemonJogador > 0) {
-      // SE A TENTATIVA FOI BEM SUCEDIDA E O POKEMON ESTÁ VIVO ENTÃO...
+        hpPokemonInimigo -=
+          pokemonDoJogador.ataque - pokemonDoInimigo.defesa * 0.65;
+        acertosPokemonJogador += 1;
+      }
+      if (tentativaPokemonInimigo > 0 && hpPokemonInimigo > 0) {
+        hpPokemonJogador -=
+          pokemonDoInimigo.ataque - pokemonDoJogador.defesa * 0.65;
+        acertosPokemonInimigo += 1;
+      }
+      contRound += 1;
 
-      hpPokemonInimigo -=
-        pokemonDoJogador.ataque - pokemonDoInimigo.defesa * 0.65;
-      acertosPokemonJogador += 1;
+      console.log(`
+              Round ${contRound}
+              ${
+                pokemonDoJogador.nome
+              } acertou um total de ${acertosPokemonJogador} ataques
+              ${
+                pokemonDoInimigo.nome
+              } acertou um total de ${acertosPokemonInimigo} ataques
+              Vida do ${pokemonDoJogador.nome} = ${hpPokemonJogador.toFixed(2)}
+              Vida do ${pokemonDoInimigo.nome} = ${hpPokemonInimigo.toFixed(
+        2
+      )}`); //STATUS DE CADA RODADA DE BATALHA
     }
-    if (tentativaPokemonInimigo > 0 && hpPokemonInimigo > 0) {
-      hpPokemonJogador -=
-        pokemonDoInimigo.ataque - pokemonDoJogador.defesa * 0.65;
-      acertosPokemonInimigo += 1;
-    }
-    contRound += 1;
 
-    console.log(`
-          Round ${contRound}
-          ${
-            pokemonDoJogador.nome
-          } acertou um total de ${acertosPokemonJogador} ataques
-          ${
-            pokemonDoInimigo.nome
-          } acertou um total de ${acertosPokemonInimigo} ataques
-          Vida do ${pokemonDoJogador.nome} = ${hpPokemonJogador.toFixed(2)}
-          Vida do ${pokemonDoInimigo.nome} = ${hpPokemonInimigo.toFixed(2)}`); //STATUS DE CADA RODADA DE BATALHA
+    if (hpPokemonJogador <= 0 && hpPokemonInimigo > hpPokemonJogador) {
+      //CHECA SE O POKEMON DO INIMIGO GANHOU
+      console.log(
+        `${pokemonDoInimigo.nome} ganhou de ${
+          pokemonDoJogador.nome
+        } e sobrou ${hpPokemonInimigo.toFixed(2)} pontos de vida`
+      );
+      // vencedor = pokemonDoInimigo.nome;
+      vitorioso = "inimigo";
+    } else if (hpPokemonInimigo <= 0 && hpPokemonJogador > hpPokemonInimigo) {
+      //CHECA SE O POKEMON DO JOGADOR GANHOU
+      console.log(
+        `${pokemonDoJogador.nome} ganhou de ${
+          pokemonDoInimigo.nome
+        }  e sobrou ${hpPokemonJogador.toFixed(2)} pontos de vida`
+      );
+      // vencedor = pokemonDoJogador.nome;
+      vitorioso = "jogador";
+
+      if (modo === "Captura") {
+        novaListaPokemons.push(pokemonDoInimigo);
+        localStorage.setItem("pokemons", JSON.stringify(novaListaPokemons));
+      } else if (modo === "Batalha") {
+        let novaExperiencia = +experiencia + 1;
+        localStorage.setItem("experiencia", novaExperiencia);
+      }
+    } else {
+      //SE NÃO EM CASOS RAROS, ELES EMPATAM
+      console.log("Os pokemons empataram");
+    }
   }
 
-  if (hpPokemonJogador <= 0 && hpPokemonInimigo > hpPokemonJogador) {
-    //CHECA SE O POKEMON DO INIMIGO GANHOU
-    console.log(
-      `${pokemonDoInimigo.nome} ganhou de ${
-        pokemonDoJogador.nome
-      } e sobrou ${hpPokemonInimigo.toFixed(2)} pontos de vida`
-    );
-    // vencedor = pokemonDoInimigo.nome;
-    vitorioso = "inimigo";
-  } else if (hpPokemonInimigo <= 0 && hpPokemonJogador > hpPokemonInimigo) {
-    //CHECA SE O POKEMON DO JOGADOR GANHOU
-    console.log(
-      `${pokemonDoJogador.nome} ganhou de ${
-        pokemonDoInimigo.nome
-      }  e sobrou ${hpPokemonJogador.toFixed(2)} pontos de vida`
-    );
-    // vencedor = pokemonDoJogador.nome;
-    vitorioso = "jogador";
-
-    if (modo === "Captura") {
-      novaListaPokemons.push(pokemonDoInimigo);
-      localStorage.setItem("pokemons", JSON.stringify(novaListaPokemons));
-    } else if (modo === "Batalha") {
-      let novaExperiencia = +experiencia + 1;
-      localStorage.setItem("experiencia", novaExperiencia);
-    }
-  } else {
-    //SE NÃO EM CASOS RAROS, ELES EMPATAM
-    console.log("Os pokemons empataram");
-  }
   function resetarPokemons() {
     setContSelecao(0);
   }
   function iniciarBatalha() {
     setCarregando(true);
     setTimeout(() => {
+      lutar();
       setCarregando(false);
       if (vitorioso === "inimigo") {
         setCondicaoInimigo("vencedor");
